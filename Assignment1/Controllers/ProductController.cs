@@ -12,17 +12,16 @@ namespace Assignment1.Controllers
 
         public static List<Product> list = new List<Product>
         {
-            new Product(){ pid=0001,pname="Laptop", price=50000.0,stock=5},
-            new Product() { pid=0002,pname="Phone", price=10000.50, stock=10}
+            new Product(){ Pid=0001,Pname="Laptop", Price=50000.0,Stock=5},
+            new Product() { Pid=0002,Pname="Phone", Price=10000.50, Stock=10}
         };
-
-
 
         public IActionResult Index()
         {
-            return View();
+            return View(list);
         }
 
+        //[Route("Create")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -32,8 +31,16 @@ namespace Assignment1.Controllers
         [HttpPost]
         public IActionResult Create(Product p)
         {
-            list.Add(p);
-            return RedirectToAction("Index");
+            if(ModelState.IsValid)
+            {
+                list.Add(p);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("Create");
+            }
+            
         }
     }
 }
