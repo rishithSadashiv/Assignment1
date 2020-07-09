@@ -22,7 +22,7 @@ namespace Assignment1.Controllers
         }
 
         //[Route("Create")]
-        [HttpGet]
+        //[HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -34,13 +34,17 @@ namespace Assignment1.Controllers
             if(ModelState.IsValid)
             {
                 list.Add(p);
-                return RedirectToAction("Index");
+                return RedirectToAction("DisplayAll");
             }
             else
             {
                 return View("Create");
             }
-            
+        }
+
+        public IActionResult DisplayAll()
+        {
+            return View(list);
         }
     }
 }
